@@ -8,7 +8,7 @@ export const profile = {
   email: 'pbauman@alumni.nd.edu',
   phone: '917.364.6717',
   linkedin: 'https://www.linkedin.com/in/phillip-bauman',
-  resume: ""
+  resume: '/Phillip_Bauman_Resume_2026_Final.pdf'
 };
 
 export const intro =

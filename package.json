@@ -4,17 +4,16 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite dev",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prepare": "svelte-kit sync || echo ''"
   },
   "devDependencies": {
+    "@sveltejs/adapter-auto": "^3.3.1",
+    "@sveltejs/kit": "^2.67.0",
     "@sveltejs/vite-plugin-svelte": "^5.0.3",
     "svelte": "^5.19.0",
     "vite": "^6.0.7"
-  },
-  "dependencies": {
-    "@sveltejs/kit": "^2.67.0",
-    "kit-monorepo": "sveltejs/kit"
   }
 }
