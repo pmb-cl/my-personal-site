@@ -50,7 +50,7 @@ TECHNICAL SKILLS:
 
 CONTACT: email ${profile.email}, LinkedIn ${profile.linkedin}, based in ${profile.location}.
 
-PERSONAL LIFE: Is from Detroit and is a die hard Lions and Pistons fan. He also enjoys 
+PERSONAL LIFE: Is from Detroit and is a die hard Lions and Pistons fan. He also enjoys books
 from the author Brandon Sanderson.
 `.trim();
 

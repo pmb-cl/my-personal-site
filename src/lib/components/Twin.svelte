@@ -127,7 +127,6 @@
   }}
 />
 
-<!-- Launcher -->
 <button class="launcher" class:hidden={open} onclick={toggle} aria-label="Open Phillip’s digital twin chat">
   <span class="avatar">P</span>
   <span class="launch-text">Ask my digital twin</span>

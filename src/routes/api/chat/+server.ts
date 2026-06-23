@@ -5,13 +5,11 @@
 import { env } from '$env/dynamic/private';
 import { json } from '@sveltejs/kit';
 import { buildSystemPrompt } from '$lib/twin-context.js';
-import type { RequestHandler } from '@sveltejs/kit';
 
 const OPENROUTER_URL = 'https://openrouter.ai/api/v1/chat/completions';
 const MODEL = 'nvidia/nemotron-3-ultra-550b-a55b:free';
 const MAX_HISTORY = 12; // cap conversation turns sent upstream
 
-/** @type {RequestHandler} */
 export async function POST({ request }) {
   const apiKey = env.OPENROUTER_API_KEY;
   if (!apiKey) {
@@ -26,17 +24,17 @@ export async function POST({ request }) {
     const parsed = await request.json();
     history = Array.isArray(parsed?.messages) ? parsed.messages : null;
     if (!history) throw new Error('`messages` must be an array');
-  } catch (err) {
+  } catch (err: any) {
     return json({ error: `Invalid request: ${err.message}` }, { status: 400 });
   }
 
   // Sanitize + cap the conversation we forward upstream.
   const trimmed = history
     .filter(
-      (m) => m && (m.role === 'user' || m.role === 'assistant') && typeof m.content === 'string'
+      (m: any) => m && (m.role === 'user' || m.role === 'assistant') && typeof m.content === 'string'
     )
     .slice(-MAX_HISTORY)
-    .map((m) => ({ role: m.role, content: m.content.slice(0, 4000) }));
+    .map((m: any) => ({ role: m.role, content: m.content.slice(0, 4000) }));
 
   const messages = [{ role: 'system', content: buildSystemPrompt() }, ...trimmed];
 
@@ -59,7 +57,7 @@ export async function POST({ request }) {
         reasoning: { exclude: true } // model reasons internally; we only stream the answer
       })
     });
-  } catch (err) {
+  } catch (err: any) {
     return json({ error: `Could not reach OpenRouter: ${err.message}` }, { status: 502 });
   }
 
@@ -74,13 +72,16 @@ export async function POST({ request }) {
   // Transform OpenRouter's SSE stream into plain text deltas for the client.
   const stream = new ReadableStream({
     async start(controller) {
-      const reader = upstream.body.getReader();
+      const reader = upstream.body?.getReader();
       const decoder = new TextDecoder();
       const encoder = new TextEncoder();
       let buffer = '';
       let sentAnything = false;
 
       try {
+        if(!reader) {
+          throw new Error("reader not defined");
+        }
         while (true) {
           const { done, value } = await reader.read();
           if (done) break;
@@ -107,7 +108,7 @@ export async function POST({ request }) {
             }
           }
         }
-      } catch (err) {
+      } catch (err: any) {
         if (!sentAnything) {
           controller.enqueue(encoder.encode(`⚠️ The connection dropped: ${err.message}`));
         }

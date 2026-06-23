@@ -11,9 +11,6 @@ export const profile = {
   resume: '/Phillip_Bauman_Resume_2026_Final.pdf'
 };
 
-export const intro =
-  'I build large-scale systems — and the engineering organizations behind them.';
-
 export const about = [
   'I’m a technical executive with over a decade of progressive experience architecting large-scale, distributed marketing and ad-tech platforms. Today I direct a multi-workstream engineering organization at Capital One Shopping, owning the full architecture, technical strategy, and delivery for advertiser products spanning messaging, network integrations, and AI-powered personalization.',
   'My career has moved between two worlds: the zero-to-one urgency of a venture-backed startup, where I served as founding CTO, and the scale of a Fortune 100, where I lead 40+ engineers and a cloud-native platform serving millions of daily users. I care about the systems, but I care just as much about the people who build them.'
@@ -131,16 +128,4 @@ export const expertise = [
       'Security & vulnerability mgmt'
     ]
   }
-];
-
-export const marquee = [
-  'Capital One Shopping',
-  'Hallo',
-  'University of Notre Dame',
-  'AWS',
-  'Apple',
-  'T-Mobile',
-  'Affirm',
-  'Garrett Camp',
-  'Steve Case'
 ];
