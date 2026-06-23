@@ -1,0 +1,151 @@
+:root {
+  /* Palette — warm ink & paper, single ember accent */
+  --ink: #0c0c0d;
+  --ink-soft: #161618;
+  --ink-line: rgba(243, 240, 233, 0.12);
+  --cream: #f3f0e9;
+  --paper: #faf8f3;
+  --paper-line: rgba(26, 24, 21, 0.12);
+
+  --on-dark: #edeae3;
+  --on-dark-muted: rgba(237, 234, 227, 0.56);
+  --on-dark-faint: rgba(237, 234, 227, 0.34);
+  --on-light: #17150f;
+  --on-light-muted: rgba(23, 21, 15, 0.58);
+  --on-light-faint: rgba(23, 21, 15, 0.36);
+
+  --accent: #c2683f;
+  --accent-soft: rgba(194, 104, 63, 0.14);
+
+  /* Type */
+  --sans: 'Inter Tight', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --serif: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+  --mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Layout */
+  --gutter: clamp(1.25rem, 5vw, 6rem);
+  --maxw: 1320px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--on-dark);
+  font-family: var(--sans);
+  font-size: 18px;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--paper);
+}
+
+/* ---- Shared utilities ---- */
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding-inline: var(--gutter);
+}
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.section {
+  padding-block: clamp(5.5rem, 12vw, 11rem);
+  position: relative;
+}
+
+/* Display headings */
+.display {
+  font-family: var(--sans);
+  font-weight: 600;
+  line-height: 0.96;
+  letter-spacing: -0.035em;
+}
+
+.serif {
+  font-family: var(--serif);
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.italic {
+  font-style: italic;
+}
+
+/* ---- Reveal-on-scroll ---- */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.9s var(--ease),
+    transform 0.9s var(--ease);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+.reveal.in-view {
+  opacity: 1;
+  transform: none;
+}
+
+/* line clip reveal used in hero */
+.clip-line {
+  display: block;
+  overflow: hidden;
+}
+.clip-line > span {
+  display: block;
+  transform: translateY(110%);
+  transition: transform 1.05s var(--ease);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.clip-line.in-view > span {
+  transform: none;
+}
